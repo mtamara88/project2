@@ -24,16 +24,19 @@
 */
 const menu = document.querySelector('#navbar__list');
 const sections = document.querySelectorAll('section');
-const fragment = document.createDocumentFragment();
 const elementClasses = sections.classList;
 const scrollToTopButton = document.querySelector('#scrollToTop');
-
 
 /**
  * End Global Variables
  * Start Helper Functions
- * 
-*/
+ *
+ */
+
+// helper function to get Section Position
+function getSectionPosition(e) {
+    sectionPosition = e.getBoundingClientRect();
+}
 
 /**
  * End Helper Functions
@@ -43,42 +46,30 @@ const scrollToTopButton = document.querySelector('#scrollToTop');
 
 // build the nav
 function buildMenu() {
-    sections.forEach((section) => {
+    for (const section of sections) {
         const listElement = document.createElement('li');
-        const linkElement = document.createElement('a');
-        linkElement.innerText = section.getAttribute('data-nav');
-        linkElement.setAttribute('class', 'menu__link');
-
-        // scroll to anchor ID using scroll to event
-        linkElement.addEventListener("click", () => {
-            section.scrollIntoView({ behavior: "smooth" });
-        });
-
-
-        listElement.appendChild(linkElement);
-        fragment.appendChild(listElement);
-    });
-    menu.appendChild(fragment);
-};
+        listElement.innerHTML = `<a href="#${section.id}" class="menu__link">${section.dataset.nav}</a>`;
+        menu.appendChild(listElement);
+    }
+}
 
 // Add class 'active' to section when it is near top of viewport
 function makeActive() {
     for (const section of sections) {
-        const box = section.getBoundingClientRect();
+        getSectionPosition(section);
+        //const box = section.getBoundingClientRect();
         // detecting the position of the section and highlighting the current section 
-        if (box.top <= 150 && box.bottom >= 150) {
+        if (sectionPosition.top <= 150 && sectionPosition.bottom >= 150) {
             if (!section.classList.contains('your-active-class')) {
                 section.classList.add('your-active-class');
-
             }
-
         } else {
             // Remove active state from other section and corresponding Nav link.
             section.classList.remove('your-active-class');
-
         }
     }
 }
+
 // Function to discplay "Scroll To Top Button" depending of the page Y offset
 function displayScrollToTopButton(e) {
     if (window.pageYOffset >= 150) {
@@ -94,24 +85,16 @@ function scrollToTop() {
     window.scrollTo(0, 0, "smooth");
 }
 
-// Function to hide menu after scrolling
-
-function hideMenu() {
-    let timer;
-
-}
-
-
 /**
  * End Main Functions
  * Begin Events
  * 
 */// Go to top of the page on button click
 
-
 // Set sections as active
 document.addEventListener("scroll", function () {
     makeActive();
+    getSectionPosition();
 });
 
 // Display Scroll To Top Button
