@@ -94,7 +94,6 @@ function scrollToTop() {
 // Set sections as active
 document.addEventListener("scroll", function () {
     makeActive();
-    getSectionPosition();
 });
 
 // Display Scroll To Top Button
