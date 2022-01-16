@@ -38,9 +38,6 @@ function getSectionPosition(e) {
     sectionPosition = e.getBoundingClientRect();
 }
 
-
-
-
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -108,6 +105,7 @@ window.addEventListener('scroll', displayScrollToTopButton);
 
 scrollToTopButton.addEventListener('click', scrollToTop);
 
+// Smooth scroll Function
 function scrollToSection() {
     const navLinks = document.querySelectorAll("#navbar__list a");
     navLinks.forEach((link) => {
@@ -129,6 +127,6 @@ function scrollToSection() {
     });
 }
 
-// Build navigation
+// Initialize app
 buildMenu();
 scrollToSection();
