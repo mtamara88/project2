@@ -11,9 +11,7 @@
 
 /* ---- Base Rules ---- */
 
-html {
-    scroll-behavior: smooth;
-}
+
 
 body {
     background: rgb(136,203,171);
@@ -50,22 +48,6 @@ p {
     color: #eee;
 }
 
-/* ---- Layout Rules ---- */
-main {
-    margin: 10vh 1em 10vh;
-}
-
-.main-hero {
-    min-height: 40vh;
-    padding-top: 3em;
-}
-
-section {
-    position: relative;
-    min-height: 80vh;
-}
-
-
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
@@ -73,14 +55,14 @@ section {
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
-    text-align: right;
+    text-align: left;
 }
 
 .navbar__menu li {
     display: inline-block;
 }
 
-.navbar__menu a {
+.navbar__menu .menu__link {
     display: block;
     padding: 1em;
     font-weight: bold;
@@ -88,13 +70,27 @@ section {
     color: #000;
 }
 
-.navbar__menu a:hover {
+.navbar__menu .menu__link:hover {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
 }
+#navbar__list { 
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#navbar__list > li {
+    flex: 0 50%;
+}
 
 
+@media (min-width: 700px) {
+    #navbar__list { 
+        display: block;
+
+    }
+}
 
 /* Header Styles */
 .page__header {
@@ -250,3 +246,4 @@ section.your-active-class .landing__container::after {
 #scrollToTop.hide {
     display:none;
 }
+

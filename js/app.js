@@ -24,8 +24,8 @@
 */
 const menu = document.querySelector('#navbar__list');
 const sections = document.querySelectorAll('section');
-const elementClasses = sections.classList;
 const scrollToTopButton = document.querySelector('#scrollToTop');
+
 
 /**
  * End Global Variables
@@ -37,6 +37,9 @@ const scrollToTopButton = document.querySelector('#scrollToTop');
 function getSectionPosition(e) {
     sectionPosition = e.getBoundingClientRect();
 }
+
+
+
 
 /**
  * End Helper Functions
@@ -50,6 +53,7 @@ function buildMenu() {
         const listElement = document.createElement('li');
         listElement.innerHTML = `<a href="#${section.id}" class="menu__link">${section.dataset.nav}</a>`;
         menu.appendChild(listElement);
+
     }
 }
 
@@ -104,5 +108,27 @@ window.addEventListener('scroll', displayScrollToTopButton);
 
 scrollToTopButton.addEventListener('click', scrollToTop);
 
+function scrollToSection() {
+    const navLinks = document.querySelectorAll("#navbar__list a");
+    navLinks.forEach((link) => {
+
+        link.addEventListener('click', (event) => {
+            event.preventDefault();  // prevent the page from reloading (a default behavior when a link is clicked)
+            // getting the id from href value
+            const id = link.getAttribute("href");
+            // get the reference to the corresponding section
+            const targetSection = document.querySelector(id);
+            // add smooth scrolling feature like this-
+            targetSection.scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+                inline: "nearest",
+            });
+        })
+
+    });
+}
+
 // Build navigation
 buildMenu();
+scrollToSection();
