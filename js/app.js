@@ -64,7 +64,6 @@ function makeActive() {
         if (sectionPosition.top <= 300 && sectionPosition.bottom >= 300) {
             if (!section.classList.contains('your-active-class')) {
                 section.classList.add('your-active-class');
-                const activeNav = document.querySelector(`#nav-${section.id}`);
                 activeNav.classList.add('your-active-class');
             }
         } else {
