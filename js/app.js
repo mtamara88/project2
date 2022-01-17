@@ -48,7 +48,7 @@ function getSectionPosition(e) {
 function buildMenu() {
     for (const section of sections) {
         const listElement = document.createElement('li');
-        listElement.innerHTML = `<a href="#${section.id}" class="menu__link">${section.dataset.nav}</a>`;
+        listElement.innerHTML = `<a href="#${section.id}" id="nav-${section.id}" >${section.dataset.nav}</a>`;
         menu.appendChild(listElement);
 
     }
@@ -58,15 +58,20 @@ function buildMenu() {
 function makeActive() {
     for (const section of sections) {
         getSectionPosition(section);
+        const activeNav = document.querySelector(`#nav-${section.id}`);
         //const box = section.getBoundingClientRect();
         // detecting the position of the section and highlighting the current section 
-        if (sectionPosition.top <= 150 && sectionPosition.bottom >= 150) {
+        if (sectionPosition.top <= 300 && sectionPosition.bottom >= 300) {
             if (!section.classList.contains('your-active-class')) {
                 section.classList.add('your-active-class');
+                const activeNav = document.querySelector(`#nav-${section.id}`);
+                activeNav.classList.add('your-active-class');
             }
         } else {
             // Remove active state from other section and corresponding Nav link.
             section.classList.remove('your-active-class');
+            activeNav.classList.remove('your-active-class');
+
         }
     }
 }
